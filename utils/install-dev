@@ -9,8 +9,9 @@
 #       303 redirects to this script.
 
 lodspeakr_dir="lodspeakr"
-lodspeakr_repository="git@github.com:alangrafu/lodspeakr.git" # NOTE: the rest of this file should be identical to file 'install'
-home=`basename $lodspeakr_repository | sed 's/.git//'`
+lodspeakr_repository="git@github.com:jpmccusker/lobi.git" # NOTE: the rest of this file should be identical to file 'install'
+home='lodspeakr'
+#home=`basename $lodspeakr_repository | sed 's/.git//'`
 
 source ~/.bashrc
 GIT=`which git`
@@ -21,7 +22,7 @@ if [ -z "$GIT" ]; then
 fi
 
 if [ ! -e "$home" ]; then
-   $GIT clone $lodspeakr_repository
+   $GIT clone $lodspeakr_repository lodspeakr
    cd $home
    ./install.sh $lodspeakr_dir
  else
