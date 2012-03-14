@@ -8,7 +8,7 @@
 #    http://lodspeakr.org/install 
 #       303 redirects to this script.
 
-lodspeakr_repository="git://github.com/jpmccusker/lobi.git"
+lodspeakr_repository="git://github.com/jimmccusker/lobi.git"
 home='lodspeakr'
 #home=`basename $lodspeakr_repository | sed 's/.git//'`
 
