@@ -8,7 +8,7 @@
 #    http://lodspeakr.org/install 
 #       303 redirects to this script.
 
-lodspeakr_repository="git://github.com/alangrafu/lodspeakr.git"
+lodspeakr_repository="git://github.com/jpmccusker/lobi.git"
 home=`basename $lodspeakr_repository | sed 's/.git//'`
 
 source ~/.bashrc
@@ -20,7 +20,7 @@ if [ -z "$GIT" ]; then
 fi
 
 if [ ! -e "$home" ]; then
-   $GIT clone $lodspeakr_repository
+   $GIT clone $lodspeakr_repository lodspeakr
    cd $home
    ./install.sh $home
  else
