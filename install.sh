@@ -28,7 +28,7 @@ while [ "$everything_ok" != "y" ]; do
   echo
   echo "== Basic Information =="
   echo
-  echo "LODSPeaKr needs to know three (3) URIs to minimally configure itself:"
+  echo "LOBI needs to know three (3) URIs to minimally configure itself:"
   echo 
   echo    "(1/3) At what URL will `pwd |sed -e 's/lodspeakr$//'` be available? (e.g. http://localhost/$parent/)"
   echo    "**Note** DO NOT include 'lodspeakr/' in the URL"
@@ -69,7 +69,7 @@ while [ "$everything_ok" != "y" ]; do
   echo "Ok, so I have the following configuration:"
   echo
   echo "Base URL is                        $basedir"
-  echo "lodspeakr is installed at          $basedir$home"
+  echo "LOBI is installed at               $basedir$home"
   echo "The local namespace is             $ns"
   echo "Your SPARQL endpoint is located at $endpoint"
 
@@ -124,7 +124,7 @@ mkdir -p components/uris
 echo
 echo "                                      *** ATTENTION ***"
 echo
-echo "LODSPeaKr needs the web server to have write permissions for $1/cache/ and $1/meta/."
+echo "LOBI needs the web server to have write permissions for $1/cache/ and $1/meta/."
 echo
 echo
 echo "Common ways of doing this:"
@@ -132,6 +132,6 @@ echo " chown -R www-apache $1/cache $1/meta (find the name of the apache user in
 echo " chmod -R g+w $1/cache $1/meta (if you have a group in common with the apache user)"
 echo " chmod -R 777 $1/cache $1/meta (highly discouraged but useful to test when everything fails. It shouldn't be used in production sites)"
 echo
-echo "Please give the server write permissions. Otherwise, LODSPeaKr will not work."
+echo "Please give the server write permissions. Otherwise, LOBI will not work."
 echo
 echo "You can now visit $basedir to navigate through your data."
