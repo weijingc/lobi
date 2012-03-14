@@ -9,7 +9,8 @@
 #       303 redirects to this script.
 
 lodspeakr_repository="git://github.com/jpmccusker/lobi.git"
-home=`basename $lodspeakr_repository | sed 's/.git//'`
+home='lodspeakr'
+#home=`basename $lodspeakr_repository | sed 's/.git//'`
 
 source ~/.bashrc
 GIT=`which git`
