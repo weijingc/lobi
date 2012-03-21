@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>RDF Viewer Demo</title>
+    <script type="text/javascript" src="http://mbostock.github.com/d3/d3.v2.js"></script>
+    <script src="https://raw.github.com/blueimp/JavaScript-MD5/master/md5.min.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jquery.rdfquery.js"></script>
+    <script type="text/javascript" src="jquery.json.js"></script>
+   <script type="text/javascript" src="rdf.js"></script>
+  <link type="text/css" rel="stylesheet" href="rdfviewer.css"/>
+  </head>
+  <body>
+    <h1><a href='.'>Viewing Relations, Attributes, and Entities in RDF (VREAR)</a></h1>
+    <div>
+      <form method="get" action="">
+        <input type="text" id="url" name="url" value="http://tw.rpi.edu/web/person/JimHendler" size="100"/>
+        <input type="submit" value="Redraw"/>
+      </form>
+    <div style="float: left;border-width: 1px; border-style:solid" id="chart"></div>
+    <script type="text/javascript">
+function restart(){
+   loadVal = $.getUrlVar("url")
+    if (loadVal != null) {
+        url.value = decodeURIComponent(loadVal);
+    }
+    viewrdf("#chart",1000,1000,url.value,400);
+}
+restart();
+   </script>
+ </body>
+</html>

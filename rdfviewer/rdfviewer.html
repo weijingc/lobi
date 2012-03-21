@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RDF Viewer Demo</title>
+    <script type="text/javascript" src="d3.js"></script>
+    <script type="text/javascript" src="d3.geom.js"></script>
+    <script type="text/javascript" src="d3.layout.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jquery.rdfquery.js"></script>
+    <script type="text/javascript" src="jquery.json.js"></script>
+    <script type="text/javascript" src="jquery.contextmenu.js"></script>
+    <script type="text/javascript" src="rdf.js"></script>
+  <link type="text/css" rel="stylesheet" href="rdfviewer.css"/>
+  </head>
+  <body>
+    <h1><a href='.'>Viewing Relations, Attributes, and Entities in RDF (VREAR)</a></h1>
+    <div>
+      <form method="get" action="">
+        <input type="text" id="url" name="url" value="http://tw.rpi.edu/web/person/JimHendler" size="100"/>
+        <input type="submit" value="Redraw"/>
+      </form>
+    <div style="float: left;border-width: 1px; border-style:solid" id="chart"></div>
+    <script type="text/javascript">
+function restart(){
+    loadVal = $.getUrlVar("url")
+    if (loadVal != null) {
+        url.value = decodeURIComponent(loadVal);
+    }
+    viewHierarchyRDF("#chart",1000,1000,url.value,400);
+}
+restart();
+   </script>
+ </body>
+</html>
