@@ -527,3 +527,85 @@ function makeScatterPlotMatrix(measures, year) {
         return c;
     }   
 }
+function makeNodeSVG(entities, vis, nodeWidth, graph) {
+    var node = vis.selectAll("g.node")
+        .data(entities)
+        .enter();
+    node = node.append("svg:foreignObject")
+        .attr('width',nodeWidth)
+        .attr('height','1000');
+    
+    node.append("xhtml:body").attr('xmlns',"http://www.w3.org/1999/xhtml");
+    
+    var body = node.selectAll("body");
+    var resource = body.append("table")
+        .attr("class","resource");
+    var titles = resource.append("xhtml:tr")
+        .append("xhtml:th")
+        .attr("colspan","2")
+        .append("xhtml:a")
+        .attr("class","title")
+        .html(function(d) {
+            if (d.label == "Youth Risk Behavior Surveillance System")
+                return '<img src="RDFicon.png" width="12" height="12"/>&nbsp;';
+            else return d.label; 
+        })
+        .attr("href",function(d) { return d.uri});
+    var types = resource.append("xhtml:tr")
+        .append("xhtml:td")
+        .attr("colspan","2")
+        .attr("class","type")
+        .html(function(d) {
+            var typeLabels = d.types.map(function(t) {
+                return '<a href="'+t.uri+'">'+t.label+'</a>';
+            });
+            if (typeLabels.length > 0) {
+                return "a&nbsp;" + typeLabels.join(", ");
+            } else {
+                return "";
+            }
+        })
+        .attr("href",function(d) { return d.uri});
+    
+    var attrs = resource.selectAll("td.attr")
+        .data(function(d) {
+            var entries = d3.entries(d.attribs);
+            return entries;
+        }).enter()
+        .append("xhtml:tr");
+    attrs.append("xhtml:td")
+        .attr("class","attrName")
+        .text(function(d) {
+            predicate = graph.getResource(d.key);
+            return predicate.label+":";
+        });
+    attrs.append("xhtml:td")
+        .html(function(d) {
+            return d.value.map(function(d) {
+                if (d.type == "resource") {
+                    label = d.label;
+                    ext = d.uri.split('.');
+                    ext = ext[ext.length-1];
+                    if ($.inArray(ext, ['jpeg','jpg','png','gif',]) != -1) {
+                        label = '<img width="100" src="'+d.uri+'" alt="'+label+'"/>'
+                    }
+                    if (ext == 'ico') {
+                        label = '<img src="'+d.uri+'" alt="'+label+'"/>'
+                    }
+                    if (d.label == " Youth Risk Behavior Surveillance System")
+                        label = d.uri;//'<img src="RDFicon.png" width="12" height="12"/>&nbsp;';
+                    result = '<a href="'+d.uri+'">'+label+'</a>';
+
+                    typeLabels = d.types.map(function(t) {
+                        return '<a href="'+t.uri+'">'+t.label+'</a>';
+                    });
+                    if (typeLabels.length > 0) {
+                        result +=  " (a&nbsp;" + typeLabels.join(", ") +")";
+                    }
+
+                    return result;
+                } else return d;
+            }).join(",<br>");
+        });
+    return node;
+}
