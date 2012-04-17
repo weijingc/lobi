@@ -461,6 +461,10 @@ function makeScatterPlotMatrix(measures, year) {
             //console.log(d.x);
             return "("+d.x.partOf[0].label[0]+")";
         });
+    //infoBoxDiv.attr("title", makeNodeSVG().toString());
+    infoBoxDiv.on("click", function() {
+        var node=makeNodeSVG(graph.entities,vis,400,graph);
+    });
     
     function plot(p) {
         var cell = d3.select(this);
