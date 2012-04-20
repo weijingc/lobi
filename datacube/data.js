@@ -355,6 +355,7 @@ function makePicker(categories) {
 }
 
 function makeScatterPlotMatrix(measures, year) {
+	// console.log(measures);
     // Size parameters.
     var size = 150,
     padding = 20,
@@ -450,8 +451,8 @@ function makeScatterPlotMatrix(measures, year) {
     infoBox.append("xhtml:body").attr('xmlns',"http://www.w3.org/1999/xhtml");
     var infoBoxBody = infoBox.select("body");
     infoBoxBody.append("div");
-    var infoBoxDiv = infoBoxBody.select("div")
-        .attr("class","infobox");
+    var infoBoxDiv = infoBoxBody.select("div");
+    infoBoxDiv.attr("class","infobox");
     infoBoxDiv.append("h3")
         .text(function(d) {
             return d.x.label;
@@ -461,9 +462,52 @@ function makeScatterPlotMatrix(measures, year) {
             //console.log(d.x);
             return "("+d.x.partOf[0].label[0]+")";
         });
-    //infoBoxDiv.attr("title", makeNodeSVG().toString());
-    infoBoxDiv.on("click", function() {
-        var node=makeNodeSVG(graph.entities,vis,400,graph);
+    infoBoxDiv.on("click", function(d) {
+    	console.log(d);
+    	var $infodiv = $('div.modal-display');
+    	// get the width and height of the viewport
+		var $vpx, $vpy;
+		
+		if (self.innerHeight) {
+			// all except IE
+			$vpx = self.innerWidth;
+			$vpy = self.innerHeight;
+		} else if (document.documentElement && document.documentElement.clientHeight) {
+			// IE 6 Strict Mode
+			$vpx = document.documentElement.clientWidth;
+			$vpy = document.documentElement.clientHeight;
+		} else if (document.body) {
+			// other IE
+			$vpx = document.body.clientWidth;
+			$vpy = document.body.clientHeight;
+		}
+//		console.log("$e:"+$e.pageX+","+$e.pageY);
+//		console.log("vp:"+$vpx+","+$vpy);
+		$infodiv.css({
+			top: 'auto',
+			right: 'auto',
+			bottom: 'auto',
+			left: 'auto'
+		});
+
+		// a quick and dirty implementation, replace it with transform/translate stuff
+		var infox = d.i*size+500;
+		var infoy = d.j*size+100;
+		if ($infodiv.outerHeight() > $vpy-infoy) {
+			$infodiv.css('bottom', ($vpy-infox)+'px');
+		} else {
+			$infodiv.css('top', infoy+'px');
+		}
+		
+		if ($infodiv.outerWidth() > $vpx-infox) {
+			$infodiv.css('right', ($vpx-infox)+'px');
+		} else {
+			$infodiv.css('left', infox+'px');
+		}
+		var table = "<a href='javascript:closeModal();'>[X]</a><table><tr><td>ID:</td><td>"+d.x.label[0]+"</td></tr><tr>" +
+				"<td>part of:</td><td>"+d.x.partOf[0].label[0]+"</td></tr></table>";
+		$infodiv.html(table);
+    	$infodiv.show();
     });
     
     function plot(p) {
@@ -612,4 +656,8 @@ function makeNodeSVG(entities, vis, nodeWidth, graph) {
             }).join(",<br>");
         });
     return node;
+}
+
+function closeModal() {
+	$(".modal-display").hide();
 }

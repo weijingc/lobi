@@ -178,7 +178,48 @@ circle {
 	display: none;
 }
 
-		fieldset { height: 0px;; border:0; margin-top: 0;}	
-		label {display: none; font-weight: normal; float: left; margin-right: .5em; font-size: 1.1em;}
-		select {display: none; margin-right: 1em; float: left;}
-		.ui-slider {margin-left: 1em;width: 800px; clear: both; top: 0;}
+fieldset {
+	height: 0px;;
+	border: 0;
+	margin-top: 0;
+}
+
+label {
+	display: none;
+	font-weight: normal;
+	float: left;
+	margin-right: .5em;
+	font-size: 1.1em;
+}
+
+select {
+	display: none;
+	margin-right: 1em;
+	float: left;
+}
+
+.ui-slider {
+	margin-left: 1em;
+	width: 800px;
+	clear: both;
+	top: 0;
+}
+
+div.modal-display {
+	position: absolute;
+	left: 500px;
+	top: 150px;
+/*	width: 50px;
+	height: 50px;*/
+	background: yellow;
+	display: none;
+}
+
+div.modal-display a {
+	float: right;
+	clear: right;
+}
+
+div.modal-display table {
+	table-layout: auto;	
+}
